@@ -11,16 +11,16 @@ nav_order: 1
 
 ## R输出xpt
 
-使用`haven`包可以轻松导出XPT格式文件：
+使用 `haven` 包可以轻松导出XPT格式文件：
 
 ```r
 library(haven)
 write_xpt(adam_data$ADAE, tmp, version = 5, name="ALL")
-## version = 5 or 8
-## name="ALL" 必须使用，否则R会自定义一个名字，导致读入SAS困难 
+# version = 5 or 8
+# name="ALL" 必须使用，否则R会自定义一个名字，导致读入SAS困难 
 ```
 
-### 参数说明
+**参数说明**
 
 - `version`: XPT文件版本，可选5或8
 - `name`: 数据集名称，必须指定以确保SAS正确读取
@@ -37,11 +37,11 @@ proc copy in=xptin out=datasets;
 run;
 ```
 
-### 操作流程
+**操作流程**
 
-1. 使用`libname`定义XPT文件路径
-2. 定义目标数据集库
-3. 使用`proc copy`将数据复制到目标库
+1. 使用 `libname` 定义XPT文件路径
+2. 定义目标数据集库  
+3. 使用 `proc copy` 将数据复制到目标库
 
 ## 注意事项
 

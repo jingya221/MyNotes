@@ -19,15 +19,18 @@ plugins:
 markdown: kramdown
 kramdown:
   input: GFM
+  auto_ids: true
+  hard_wrap: false
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     css_class: 'highlight'
+    default_lang: text
     span:
       line_numbers: false
     block:
-      line_numbers: true
+      line_numbers: false
 
-# 高亮设置
+# 高亮设置  
 highlighter: rouge
 
 # Just the Docs 主题配置
