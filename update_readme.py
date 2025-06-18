@@ -262,6 +262,88 @@ def update_index_page(markdown_files):
     
     return True
 
+def update_readme_from_index():
+    """根据docs/index.md的内容更新README.md"""
+    index_file = Path('./docs/index.md')
+    readme_file = Path('./README.md')
+    
+    if not index_file.exists():
+        print("docs/index.md文件不存在！")
+        return False
+    
+    try:
+        # 读取index.md内容
+        with open(index_file, 'r', encoding='utf-8') as file:
+            index_content = file.read()
+        
+        # 调整链接路径：因为README.md在根目录，需要添加docs/前缀
+        readme_content = index_content
+        
+        # 修复相对路径链接
+        # 将 (guide/ 替换为 (docs/guide/
+        readme_content = re.sub(r'\(guide/', r'(docs/guide/', readme_content)
+        # 将 (notes/ 替换为 (docs/notes/
+        readme_content = re.sub(r'\(notes/', r'(docs/notes/', readme_content)
+        
+        # 添加README.md特有的说明
+        readme_header = """# 📚 个人笔记系统
+
+> 🌐 **在线浏览**: [https://jingya221.github.io/MyNotes/](https://jingya221.github.io/MyNotes/)
+
+欢迎来到我的个人笔记管理系统！这里收录了各种学习笔记和技术文档。
+
+"""
+        
+        readme_footer = f"""
+
+---
+
+## 🚀 如何使用
+
+1. **在线浏览**: 访问 [GitHub Pages](https://jingya221.github.io/MyNotes/) 获得最佳阅读体验
+2. **本地运行**: 
+   ```bash
+   pip install mkdocs mkdocs-material
+   mkdocs serve
+   ```
+3. **添加笔记**: 在 `docs/notes/` 文件夹中创建新的markdown文件
+4. **自动更新**: 运行 `python update_readme.py` 或 `update_notes.bat` 自动更新索引
+
+## 📁 项目结构
+
+```
+NotesGit/
+├── docs/                    # MkDocs文档目录
+│   ├── index.md            # 首页
+│   ├── notes/              # 笔记文件夹
+│   └── guide/              # 使用指南
+├── mkdocs.yml              # MkDocs配置文件
+├── update_readme.py        # 自动更新脚本
+├── update_notes.bat        # Windows批处理文件
+└── README.md               # 项目说明（本文件）
+```
+
+---
+
+*📅 最后更新: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*
+"""
+        
+        # 替换首页标题和说明
+        readme_content = re.sub(r'^# 📚 个人笔记系统\n\n.*?\n\n', '', readme_content, flags=re.MULTILINE | re.DOTALL)
+        
+        # 组合最终内容
+        final_content = readme_header + readme_content + readme_footer
+        
+        # 写入README.md
+        with open(readme_file, 'w', encoding='utf-8') as file:
+            file.write(final_content)
+        
+        return True
+    
+    except Exception as e:
+        print(f"更新README.md时出错: {e}")
+        return False
+
 def main():
     """主函数"""
     print("🔍 正在扫描docs/notes目录...")
@@ -286,6 +368,12 @@ def main():
         print("✅ 已更新导航配置 (mkdocs.yml)")
     else:
         print("❌ 更新导航配置失败")
+    
+    # 更新README.md
+    if update_readme_from_index():
+        print("✅ 已更新README.md（基于index.md）")
+    else:
+        print("❌ 更新README.md失败")
     
     print("\n📊 统计信息:")
     categories = set(f['category'] for f in markdown_files)
