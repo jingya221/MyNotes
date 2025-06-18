@@ -5,10 +5,13 @@
 ## 📋 笔记目录
 
 ### R shiny开发教程
-- [00-使用{Golem}搭建Rshiny project指南 <!-- omit in toc -->](notes/R shiny开发教程/00-使用{Golem}搭建Rshiny project指南) - >作者：王靖雅 <br>
-- [01-数据读入&数据处理模块开发指南 <!-- omit in toc -->](notes/R shiny开发教程/01-数据读入&数据处理模块开发指南) - >作者：王靖雅 <br>
-- [02-分析图表相关模块开发指南 <!-- omit in toc -->](notes/R shiny开发教程/02-分析图表相关模块开发指南) - >作者：王靖雅 <br>
-- [03-基于MediSum模块开发项目的ShinyApp整合指南 <!-- omit in toc -->](notes/R shiny开发教程/03-基于MediSum模块开发项目的ShinyApp整合指南) - >作者：王靖雅 <br>
+- [00-使用{Golem}搭建Rshiny project指南 <!-- omit in toc -->](notes/R语言相关/R shiny开发教程/00-使用{Golem}搭建Rshiny project指南) - >作者：王靖雅 <br>
+- [01-数据读入&数据处理模块开发指南 <!-- omit in toc -->](notes/R语言相关/R shiny开发教程/01-数据读入&数据处理模块开发指南) - >作者：王靖雅 <br>
+- [02-分析图表相关模块开发指南 <!-- omit in toc -->](notes/R语言相关/R shiny开发教程/02-分析图表相关模块开发指南) - >作者：王靖雅 <br>
+- [03-基于MediSum模块开发项目的ShinyApp整合指南 <!-- omit in toc -->](notes/R语言相关/R shiny开发教程/03-基于MediSum模块开发项目的ShinyApp整合指南) - >作者：王靖雅 <br>
+
+### R shiny部署教程
+- [R Shiny Server Deployment in Hengrui Server](notes/R语言相关/R shiny部署教程/0-R Shiny Server Deployment in Hengrui Server) - shnvlshiny01	10.10.5.114	 root/Hr@shiny0821
 
 ### R语言相关
 - [XPT文件导出与读取](notes/R语言相关/xpt-export-import) - 这个笔记来源于R taskforce出现的导出xpt无法打开的问题。
@@ -20,8 +23,8 @@
 
 ## 📊 统计信息
 
-- **笔记分类**: 2个
-- **总笔记数**: 5篇
+- **笔记分类**: 3个
+- **总笔记数**: 6篇
 - **最近更新**: XPT文件导出与读取
 
 ---

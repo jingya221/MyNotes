@@ -10,7 +10,7 @@ import re
 import yaml
 from datetime import datetime
 from pathlib import Path
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 
 def extract_title_from_markdown(file_path):
     """从markdown文件中提取标题"""
@@ -61,7 +61,13 @@ def get_file_info(file_path):
     
     # 获取相对于docs/notes文件夹的路径来确定分类
     relative_path = Path(file_path).relative_to(Path('./docs/notes'))
-    category = str(relative_path.parent) if relative_path.parent != Path('.') else "根目录"
+    
+    # 改进分类逻辑：使用直接父文件夹作为分类
+    if relative_path.parent == Path('.'):
+        category = "根目录"
+    else:
+        # 使用直接父文件夹名作为分类
+        category = relative_path.parent.name
     
     return {
         'path': file_path,
@@ -70,7 +76,8 @@ def get_file_info(file_path):
         'category': category,
         'modified': modified_time,
         'size': stat.st_size,
-        'relative_path': str(relative_path)
+        'relative_path': str(relative_path),
+        'folder_path': str(relative_path.parent) if relative_path.parent != Path('.') else ""
     }
 
 def scan_notes_folder():
@@ -142,34 +149,48 @@ def update_mkdocs_nav(markdown_files):
     with open(mkdocs_file, 'r', encoding='utf-8') as file:
         config = yaml.safe_load(file)
     
-    # 按分类组织文件
-    categories = defaultdict(list)
+    # 按分类组织文件，使用OrderedDict保持顺序
+    categories = OrderedDict()
     for file_info in markdown_files:
-        categories[file_info['category']].append(file_info)
+        category = file_info['category']
+        if category not in categories:
+            categories[category] = []
+        categories[category].append(file_info)
     
-    # 生成导航结构
+    # 生成导航结构 - 改进版本
     nav_notes = []
-    for category, files in sorted(categories.items()):
+    
+    # 对分类按名称排序，但根目录排在最前面
+    sorted_categories = sorted(categories.keys(), key=lambda x: (x != "根目录", x))
+    
+    for category in sorted_categories:
+        files = categories[category]
         if category == "根目录":
-            category_nav = []
+            # 根目录文件直接放在笔记分类下
             for file_info in sorted(files, key=lambda x: x['title']):
                 page_path = file_info['relative_path'].replace('\\', '/')
-                category_nav.append({file_info['title']: f"notes/{page_path}"})
-            nav_notes.append({"根目录": category_nav})
+                nav_notes.append({file_info['title']: f"notes/{page_path}"})
         else:
+            # 其他分类作为子菜单
             category_nav = []
             for file_info in sorted(files, key=lambda x: x['title']):
                 page_path = file_info['relative_path'].replace('\\', '/')
                 category_nav.append({file_info['title']: f"notes/{page_path}"})
             nav_notes.append({category: category_nav})
     
-    # 更新导航配置
-    if 'nav' in config:
-        # 找到并更新笔记分类部分
-        for i, item in enumerate(config['nav']):
-            if isinstance(item, dict) and '笔记分类' in item:
-                config['nav'][i]['笔记分类'] = nav_notes
-                break
+    # 创建完整的导航结构
+    new_nav = [
+        {'首页': 'index.md'},
+        {'笔记分类': nav_notes},
+        {'使用指南': [
+            {'如何使用': 'guide/usage.md'},
+            {'添加笔记': 'guide/add-notes.md'},
+            {'更新索引': 'guide/update-index.md'}
+        ]}
+    ]
+    
+    # 直接替换整个导航配置
+    config['nav'] = new_nav
     
     # 写回文件
     with open(mkdocs_file, 'w', encoding='utf-8') as file:
@@ -191,7 +212,10 @@ def update_index_page(markdown_files):
     
     # 生成笔记目录内容
     notes_content = []
-    for category in sorted(categories.keys()):
+    # 对分类按名称排序，但根目录排在最前面
+    sorted_categories = sorted(categories.keys(), key=lambda x: (x != "根目录", x))
+    
+    for category in sorted_categories:
         notes_content.append(f"### {category}")
         files = categories[category]
         if files:
