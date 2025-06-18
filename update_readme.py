@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-自动更新README.md中的笔记索引
-扫描notes文件夹中的所有markdown文件，并更新README.md中的目录
-支持分类显示和更好的目录结构
+MkDocs笔记自动索引生成器
+自动扫描docs/notes目录下的markdown文件，生成首页索引和导航配置
 """
 
 import os
 import re
+import yaml
 from datetime import datetime
 from pathlib import Path
 from collections import defaultdict
@@ -45,7 +45,7 @@ def extract_description_from_markdown(file_path):
             if line.startswith('#'):
                 found_title = True
                 continue
-            if found_title and line and not line.startswith('#') and not line.startswith('```'):
+            if found_title and line and not line.startswith('#') and not line.startswith('```') and not line.startswith('!!!'):
                 # 取前50个字符作为描述，避免代码块
                 description = line[:50] + ("..." if len(line) > 50 else "")
                 break
@@ -59,8 +59,8 @@ def get_file_info(file_path):
     stat = os.stat(file_path)
     modified_time = datetime.fromtimestamp(stat.st_mtime)
     
-    # 获取相对于notes文件夹的路径来确定分类
-    relative_path = Path(file_path).relative_to(Path('./notes'))
+    # 获取相对于docs/notes文件夹的路径来确定分类
+    relative_path = Path(file_path).relative_to(Path('./docs/notes'))
     category = str(relative_path.parent) if relative_path.parent != Path('.') else "根目录"
     
     return {
@@ -69,12 +69,13 @@ def get_file_info(file_path):
         'description': extract_description_from_markdown(file_path),
         'category': category,
         'modified': modified_time,
-        'size': stat.st_size
+        'size': stat.st_size,
+        'relative_path': str(relative_path)
     }
 
 def scan_notes_folder():
-    """扫描notes文件夹中的所有markdown文件"""
-    notes_folder = Path('./notes')
+    """扫描docs/notes文件夹中的所有markdown文件"""
+    notes_folder = Path('./docs/notes')
     if not notes_folder.exists():
         return []
     
@@ -102,123 +103,159 @@ def generate_statistics(markdown_files):
     recent_count = sum(1 for f in markdown_files if (today - f['modified'].date()).days <= 7)
     
     stats = [
-        f"## 📊 统计信息",
-        "",
-        f"- 📝 **总笔记数：{total_files} 个**",
-        f"- 📁 **分类数：{total_categories} 个**", 
-        f"- 🔥 **最近7天更新：{recent_count} 个**",
-        f"- 📅 **最后更新：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}**",
-        "",
-        "---",
+        f"📝 **总笔记数：{total_files} 个**  ",
+        f"📁 **分类数：{total_categories} 个**  ",
+        f"🔥 **最近7天更新：{recent_count} 个**  ",
+        f"📅 **最后更新：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}**",
         ""
     ]
     
     return '\n'.join(stats)
 
-def generate_index_content(markdown_files):
-    """生成目录索引内容 - 简化版，仅更新统计信息和最近更新"""
+def generate_recent_updates(markdown_files):
+    """生成最近更新列表"""
     if not markdown_files:
-        return "*目前还没有笔记，快去创建第一个笔记吧！*\n"
+        return ""
     
     content = []
-    
-    # 添加统计信息
-    content.append(generate_statistics(markdown_files))
-    
-    # 按修改时间分组 - 最近更新
     today = datetime.now().date()
     recent_files = [f for f in markdown_files if (today - f['modified'].date()).days <= 7]
     
     if recent_files:
-        content.append("## 🔥 最近更新\n")
         for file_info in recent_files[:5]:  # 只显示最近5个
-            # 使用Jekyll相对URL
-            file_path = str(file_info['path']).replace('\\', '/')
-            # 转换为Jekyll页面路径
-            if file_path.startswith('notes/'):
-                page_path = file_path.replace('.md', '/').replace('notes/', '')
-                relative_path = f"{{{{ site.baseurl }}}}/notes/{page_path}"
-            else:
-                relative_path = f"{{{{ site.baseurl }}}}/{file_path.replace('.md', '/')}"
-            
+            # MkDocs相对路径
+            page_path = file_info['relative_path'].replace('\\', '/').replace('.md', '')
             modified_str = file_info['modified'].strftime('%Y-%m-%d')
             category_badge = f"`{file_info['category']}`" if file_info['category'] != "根目录" else ""
             description = f" - {file_info['description']}" if file_info['description'] else ""
-            content.append(f"- [**{file_info['title']}**]({relative_path}) {category_badge} *({modified_str})*{description}")
-        content.append("")
+            content.append(f"- [**{file_info['title']}**](notes/{page_path}) {category_badge} *({modified_str})*{description}")
     
     return '\n'.join(content)
 
-def update_file(file_path, markdown_files):
-    """更新指定的markdown文件"""
-    if not file_path.exists():
-        print(f"{file_path.name}文件不存在！")
+def update_mkdocs_nav(markdown_files):
+    """更新mkdocs.yml中的导航配置"""
+    mkdocs_file = Path('./mkdocs.yml')
+    if not mkdocs_file.exists():
+        print("mkdocs.yml文件不存在！")
         return False
     
-    # 读取当前文件内容
-    with open(file_path, 'r', encoding='utf-8') as file:
-        content = file.read()
+    with open(mkdocs_file, 'r', encoding='utf-8') as file:
+        config = yaml.safe_load(file)
     
-    # 生成新的索引内容
-    index_content = generate_index_content(markdown_files)
+    # 按分类组织文件
+    categories = defaultdict(list)
+    for file_info in markdown_files:
+        categories[file_info['category']].append(file_info)
     
-    # 替换索引部分
-    start_marker = '<!-- 笔记索引开始 -->'
-    end_marker = '<!-- 笔记索引结束 -->'
+    # 生成导航结构
+    nav_notes = []
+    for category, files in sorted(categories.items()):
+        if category == "根目录":
+            category_nav = []
+            for file_info in sorted(files, key=lambda x: x['title']):
+                page_path = file_info['relative_path'].replace('\\', '/')
+                category_nav.append({file_info['title']: f"notes/{page_path}"})
+            nav_notes.append({"根目录": category_nav})
+        else:
+            category_nav = []
+            for file_info in sorted(files, key=lambda x: x['title']):
+                page_path = file_info['relative_path'].replace('\\', '/')
+                category_nav.append({file_info['title']: f"notes/{page_path}"})
+            nav_notes.append({category: category_nav})
     
-    pattern = f'{re.escape(start_marker)}.*?{re.escape(end_marker)}'
-    new_section = f'{start_marker}\n{index_content}{end_marker}'
+    # 更新导航配置
+    if 'nav' in config:
+        # 找到并更新笔记分类部分
+        for i, item in enumerate(config['nav']):
+            if isinstance(item, dict) and '笔记分类' in item:
+                config['nav'][i]['笔记分类'] = nav_notes
+                break
     
-    if re.search(pattern, content, re.DOTALL):
-        new_content = re.sub(pattern, new_section, content, flags=re.DOTALL)
-    else:
-        print(f"未找到索引标记，请检查{file_path.name}格式！")
-        return False
-    
-    # 更新最后更新时间
-    current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    new_content = re.sub(
-        r'\*最后更新:.*?\*',
-        f'*最后更新: {current_time}*',
-        new_content
-    )
-    
-    # 写入文件
-    with open(file_path, 'w', encoding='utf-8') as file:
-        file.write(new_content)
+    # 写回文件
+    with open(mkdocs_file, 'w', encoding='utf-8') as file:
+        yaml.dump(config, file, default_flow_style=False, allow_unicode=True, sort_keys=False)
     
     return True
 
-def update_readme():
-    """更新README.md和index.md文件"""
+def update_index_page(markdown_files):
+    """更新docs/index.md首页"""
+    index_file = Path('./docs/index.md')
+    if not index_file.exists():
+        print("docs/index.md文件不存在！")
+        return False
+    
+    # 读取当前文件内容
+    with open(index_file, 'r', encoding='utf-8') as file:
+        content = file.read()
+    
+    # 生成新的统计信息
+    stats_content = generate_statistics(markdown_files)
+    
+    # 生成最近更新
+    recent_content = generate_recent_updates(markdown_files)
+    
+    # 替换统计信息部分
+    stats_pattern = r'<!-- 笔记索引开始 -->.*?<!-- 笔记索引结束 -->'
+    new_stats_section = f'<!-- 笔记索引开始 -->\n{stats_content}<!-- 笔记索引结束 -->'
+    
+    if re.search(stats_pattern, content, re.DOTALL):
+        content = re.sub(stats_pattern, new_stats_section, content, flags=re.DOTALL)
+    else:
+        print("未找到统计信息标记！")
+        return False
+    
+    # 替换最近更新部分
+    recent_pattern = r'(## 🔥 最近更新\n\n).*?(?=\n---|\n##|\Z)'
+    if recent_content:
+        new_recent_section = f'\\1{recent_content}\n'
+        content = re.sub(recent_pattern, new_recent_section, content, flags=re.DOTALL)
+    
+    # 更新最后更新时间
+    current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    content = re.sub(
+        r'<small>\*最后更新:.*?\*</small>',
+        f'<small>*最后更新: {current_time}*</small>',
+        content
+    )
+    
+    # 写入文件
+    with open(index_file, 'w', encoding='utf-8') as file:
+        file.write(content)
+    
+    return True
+
+def main():
+    """主函数"""
+    print("🔍 正在扫描docs/notes目录...")
+    
     # 扫描笔记文件
     markdown_files = scan_notes_folder()
     
-    success_count = 0
-    files_to_update = [
-        Path('./README.md'),
-        Path('./index.md')
-    ]
+    if not markdown_files:
+        print("❌ 未找到任何markdown文件！")
+        return
     
-    for file_path in files_to_update:
-        if file_path.exists():
-            if update_file(file_path, markdown_files):
-                print(f"✅ {file_path.name} 已更新！")
-                success_count += 1
-            else:
-                print(f"❌ {file_path.name} 更新失败！")
-        else:
-            print(f"⚠️ {file_path.name} 文件不存在，跳过更新")
+    print(f"📝 找到 {len(markdown_files)} 个笔记文件")
     
-    if success_count > 0:
-        print(f"📊 找到 {len(markdown_files)} 个笔记文件")
-        
-        # 显示分类统计
-        if markdown_files:
-            categories = set(f['category'] for f in markdown_files)
-            print(f"📁 发现分类: {', '.join(sorted(categories))}")
+    # 更新首页
+    if update_index_page(markdown_files):
+        print("✅ 已更新首页 (docs/index.md)")
+    else:
+        print("❌ 更新首页失败")
     
-    return success_count > 0
+    # 更新导航配置
+    if update_mkdocs_nav(markdown_files):
+        print("✅ 已更新导航配置 (mkdocs.yml)")
+    else:
+        print("❌ 更新导航配置失败")
+    
+    print("\n📊 统计信息:")
+    categories = set(f['category'] for f in markdown_files)
+    for category in sorted(categories):
+        count = len([f for f in markdown_files if f['category'] == category])
+        print(f"  {category}: {count} 个文件")
+    
+    print(f"\n🎉 更新完成！请运行 'mkdocs serve' 预览效果")
 
-if __name__ == '__main__':
-    update_readme() 
+if __name__ == "__main__":
+    main() 
