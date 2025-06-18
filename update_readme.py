@@ -184,43 +184,57 @@ def update_index_page(markdown_files):
         print("docs/index.md文件不存在！")
         return False
     
-    # 读取当前文件内容
-    with open(index_file, 'r', encoding='utf-8') as file:
-        content = file.read()
+    # 按分类组织文件
+    categories = defaultdict(list)
+    for file_info in markdown_files:
+        categories[file_info['category']].append(file_info)
     
-    # 生成新的统计信息
-    stats_content = generate_statistics(markdown_files)
+    # 生成笔记目录内容
+    notes_content = []
+    for category in sorted(categories.keys()):
+        notes_content.append(f"### {category}")
+        files = categories[category]
+        if files:
+            for file_info in sorted(files, key=lambda x: x['title']):
+                page_path = file_info['relative_path'].replace('\\', '/').replace('.md', '')
+                description = f" - {file_info['description']}" if file_info['description'] else ""
+                notes_content.append(f"- [{file_info['title']}](notes/{page_path}){description}")
+        else:
+            notes_content.append("*该分类暂无笔记*")
+        notes_content.append("")
     
-    # 生成最近更新
-    recent_content = generate_recent_updates(markdown_files)
+    # 生成统计信息
+    total_files = len(markdown_files)
+    total_categories = len(categories)
+    latest_note = markdown_files[0]['title'] if markdown_files else "无"
     
-    # 替换统计信息部分
-    stats_pattern = r'<!-- 笔记索引开始 -->.*?<!-- 笔记索引结束 -->'
-    new_stats_section = f'<!-- 笔记索引开始 -->\n{stats_content}<!-- 笔记索引结束 -->'
-    
-    if re.search(stats_pattern, content, re.DOTALL):
-        content = re.sub(stats_pattern, new_stats_section, content, flags=re.DOTALL)
-    else:
-        print("未找到统计信息标记！")
-        return False
-    
-    # 替换最近更新部分
-    recent_pattern = r'(## 🔥 最近更新\n\n).*?(?=\n---|\n##|\Z)'
-    if recent_content:
-        new_recent_section = f'\\1{recent_content}\n'
-        content = re.sub(recent_pattern, new_recent_section, content, flags=re.DOTALL)
-    
-    # 更新最后更新时间
-    current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    content = re.sub(
-        r'<small>\*最后更新:.*?\*</small>',
-        f'<small>*最后更新: {current_time}*</small>',
-        content
-    )
+    # 构建新的首页内容
+    new_content = f"""# 📚 个人笔记系统
+
+欢迎来到我的个人笔记管理系统！这里收录了各种学习笔记和技术文档。
+
+## 📋 笔记目录
+
+{chr(10).join(notes_content).rstrip()}
+## 🔧 使用指南
+
+- [基础使用指南](guide/usage.md) - 了解如何使用这个笔记系统
+- [添加新笔记](guide/add-notes.md) - 学习如何创建和组织新的笔记文件  
+- [更新索引](guide/update-index.md) - 如何自动更新和维护笔记索引
+
+## 📊 统计信息
+
+- **笔记分类**: {total_categories}个
+- **总笔记数**: {total_files}篇
+- **最近更新**: {latest_note}
+
+---
+
+> 💡 **提示**: 点击左侧导航栏可以快速浏览所有笔记分类，使用顶部搜索功能可以快速查找内容。"""
     
     # 写入文件
     with open(index_file, 'w', encoding='utf-8') as file:
-        file.write(content)
+        file.write(new_content)
     
     return True
 
