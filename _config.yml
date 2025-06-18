@@ -1,0 +1,63 @@
+# GitHub Pages配置
+title: "📝 我的Markdown笔记本"
+description: "个人学习笔记和想法的收集地"
+author: "Jingya Wang"
+email: "jingya221@gmail.com"
+url: "https://jingya221.github.io"
+baseurl: "/MyNotes"
+
+# 主题设置
+theme: minima
+# 或者使用其他漂亮的主题：
+# remote_theme: pages-themes/cayman@v0.2.0
+# remote_theme: pages-themes/architect@v0.2.0
+# remote_theme: pages-themes/slate@v0.2.0
+
+# 插件
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Markdown设置
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+
+# 高亮设置
+highlighter: rouge
+
+# 导航设置
+navigation:
+  - title: "🏠 首页"
+    url: "/"
+  - title: "📚 所有笔记"
+    url: "#分类浏览"
+  - title: "🔍 搜索"
+    url: "#字母索引"
+
+# 社交链接
+social_links:
+  github: "jingya221"
+  email: "jingya221@gmail.com"
+
+# 显示设置
+show_excerpts: true
+paginate: 10
+
+# 排除文件
+exclude:
+  - README.md
+  - SETUP_GUIDE.md
+  - update_readme.py
+  - update_notes.bat
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock 

@@ -35,4 +35,14 @@ venv/
 *.backup
 
 # Windows
-*.lnk 
+*.lnk
+
+# Jekyll
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Gem files
+Gemfile
+Gemfile.lock 

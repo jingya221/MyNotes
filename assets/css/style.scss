@@ -1,0 +1,251 @@
+@import "{{ site.theme }}";
+
+/* 自定义样式 */
+
+/* 整体布局 */
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 标题样式 */
+h1 {
+  color: #2c3e50;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  color: #34495e;
+  border-left: 4px solid #3498db;
+  padding-left: 15px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #2c3e50;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+h4 {
+  color: #7f8c8d;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+/* 统计信息卡片 */
+.stats-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card h3 {
+  margin-top: 0;
+  color: white;
+  border-left: none;
+  padding-left: 0;
+}
+
+.stats-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stats-card li {
+  margin: 10px 0;
+  padding: 5px 0;
+}
+
+/* 分类标签 */
+code {
+  background-color: #f8f9fa;
+  color: #e83e8c;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+  font-size: 0.85em;
+  margin: 0 4px;
+}
+
+/* 链接样式 */
+a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+/* 列表样式 */
+ul {
+  line-height: 1.8;
+}
+
+li {
+  margin: 8px 0;
+}
+
+/* 最近更新区域 */
+h2:contains("最近更新") + ul li {
+  background: #f8f9fa;
+  padding: 10px;
+  border-left: 4px solid #28a745;
+  margin: 10px 0;
+  border-radius: 4px;
+}
+
+/* 分类浏览区域 */
+h3[id*="分类"] {
+  background: #e9ecef;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #17a2b8;
+}
+
+/* 字母索引导航 */
+.alphabet-nav {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 20px 0;
+  border: 1px solid #dee2e6;
+}
+
+.alphabet-nav a {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 2px;
+  background: #007bff;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.alphabet-nav a:hover {
+  background: #0056b3;
+  text-decoration: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 0 15px;
+  }
+  
+  h1 {
+    font-size: 1.8em;
+  }
+  
+  h2 {
+    font-size: 1.4em;
+  }
+  
+  .stats-card {
+    padding: 15px;
+  }
+  
+  .alphabet-nav a {
+    padding: 3px 6px;
+    font-size: 0.9em;
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+  }
+  
+  h1, h2, h3, h4 {
+    color: #ffffff;
+  }
+  
+  code {
+    background-color: #2d2d2d;
+    color: #ff79c6;
+    border-color: #4a4a4a;
+  }
+  
+  .stats-card {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  }
+  
+  h3[id*="分类"] {
+    background: #2d2d2d;
+    color: #ffffff;
+  }
+  
+  .alphabet-nav {
+    background: #2d2d2d;
+    border-color: #4a4a4a;
+  }
+}
+
+/* 动画效果 */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 提示框样式 */
+.tip {
+  background: #d4edda;
+  color: #155724;
+  padding: 15px;
+  border-left: 4px solid #28a745;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.warning {
+  background: #fff3cd;
+  color: #856404;
+  padding: 15px;
+  border-left: 4px solid #ffc107;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+/* 表格样式 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background: #f8f9fa;
+  font-weight: bold;
+  color: #495057;
+}
+
+tr:hover {
+  background: #f5f5f5;
+} 
