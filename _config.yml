@@ -6,12 +6,8 @@ email: "jingya221@gmail.com"
 url: "https://jingya221.github.io"
 baseurl: "/MyNotes"
 
-# 主题设置
-theme: minima
-# 或者使用其他漂亮的主题：
-# remote_theme: pages-themes/cayman@v0.2.0
-# remote_theme: pages-themes/architect@v0.2.0
-# remote_theme: pages-themes/slate@v0.2.0
+# 主题设置 - 使用Just the Docs文档主题
+remote_theme: just-the-docs/just-the-docs
 
 # 插件
 plugins:
@@ -34,23 +30,40 @@ kramdown:
 # 高亮设置
 highlighter: rouge
 
-# 导航设置
-navigation:
-  - title: "🏠 首页"
-    url: "/"
-  - title: "📚 所有笔记"
-    url: "#分类浏览"
-  - title: "🔍 搜索"
-    url: "#字母索引"
+# Just the Docs 主题配置
+color_scheme: nil
+search_enabled: true
+search:
+  heading_level: 2
+  previews: 2
+  preview_words_before: 3
+  preview_words_after: 3
+  tokenizer_separator: /[\s/]+/
+  rel_url: true
+  button: false
 
-# 社交链接
-social_links:
-  github: "jingya221"
-  email: "jingya221@gmail.com"
+# 导航配置
+nav_sort: case_insensitive
+nav_fold: true
+
+# 页脚配置
+footer_content: "Copyright &copy; 2024 Jingya Wang. 使用 <a href=\"https://github.com/just-the-docs/just-the-docs\">Just the Docs</a> 构建."
+
+# 社交链接（在页脚显示）
+gh_edit_link: true
+gh_edit_link_text: "在GitHub上编辑此页"
+gh_edit_repository: "https://github.com/jingya221/MyNotes"
+gh_edit_branch: "main"
+gh_edit_view_mode: "tree"
+
+# 代码复制按钮
+enable_copy_code_button: true
 
 # 显示设置
-show_excerpts: true
-paginate: 10
+heading_anchors: true
+aux_links:
+  "在GitHub上查看":
+    - "//github.com/jingya221/MyNotes"
 
 # 排除文件
 exclude:

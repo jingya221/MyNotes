@@ -116,7 +116,7 @@ def generate_statistics(markdown_files):
     return '\n'.join(stats)
 
 def generate_index_content(markdown_files):
-    """生成目录索引内容"""
+    """生成目录索引内容 - 简化版，仅更新统计信息和最近更新"""
     if not markdown_files:
         return "*目前还没有笔记，快去创建第一个笔记吧！*\n"
     
@@ -131,81 +131,20 @@ def generate_index_content(markdown_files):
     
     if recent_files:
         content.append("## 🔥 最近更新\n")
-        for file_info in recent_files[:10]:  # 只显示最近10个
-            relative_path = str(file_info['path']).replace('\\', '/')
+        for file_info in recent_files[:5]:  # 只显示最近5个
+            # 使用Jekyll相对URL
+            file_path = str(file_info['path']).replace('\\', '/')
+            # 转换为Jekyll页面路径
+            if file_path.startswith('notes/'):
+                page_path = file_path.replace('.md', '/').replace('notes/', '')
+                relative_path = f"{{{{ site.baseurl }}}}/notes/{page_path}"
+            else:
+                relative_path = f"{{{{ site.baseurl }}}}/{file_path.replace('.md', '/')}"
+            
             modified_str = file_info['modified'].strftime('%Y-%m-%d')
             category_badge = f"`{file_info['category']}`" if file_info['category'] != "根目录" else ""
             description = f" - {file_info['description']}" if file_info['description'] else ""
             content.append(f"- [**{file_info['title']}**]({relative_path}) {category_badge} *({modified_str})*{description}")
-        content.append("")
-        content.append("---")
-        content.append("")
-    
-    # 按分类分组显示
-    content.append("## 📚 分类浏览")
-    content.append("")
-    
-    files_by_category = defaultdict(list)
-    for file_info in markdown_files:
-        files_by_category[file_info['category']].append(file_info)
-    
-    # 按分类名排序，根目录放在最前面
-    sorted_categories = sorted(files_by_category.keys(), key=lambda x: (x != "根目录", x))
-    
-    for category in sorted_categories:
-        files_in_category = files_by_category[category]
-        category_display = "📋 根目录" if category == "根目录" else f"📁 {category}"
-        content.append(f"### {category_display} *({len(files_in_category)} 个笔记)*\n")
-        
-        # 按标题排序
-        files_in_category.sort(key=lambda x: x['title'])
-        
-        for file_info in files_in_category:
-            relative_path = str(file_info['path']).replace('\\', '/')
-            modified_str = file_info['modified'].strftime('%Y-%m-%d')
-            description = f"  \n  {file_info['description']}" if file_info['description'] else ""
-            content.append(f"- [**{file_info['title']}**]({relative_path}) *({modified_str})*{description}")
-        
-        content.append("")
-    
-    content.append("---")
-    content.append("")
-    
-    # 按字母索引（可选的快速查找）
-    content.append("## 🔍 字母索引")
-    content.append("")
-    
-    files_by_letter = defaultdict(list)
-    for file_info in markdown_files:
-        first_char = file_info['title'][0].upper()
-        if first_char.isalpha():
-            files_by_letter[first_char].append(file_info)
-        else:
-            files_by_letter['#'].append(file_info)
-    
-    # 生成字母索引导航
-    available_letters = sorted([k for k in files_by_letter.keys() if k != '#'])
-    if '#' in files_by_letter:
-        available_letters.append('#')
-    
-    nav_links = []
-    for letter in available_letters:
-        anchor = letter.lower() + '-字母' if letter != '#' else 'other-字母'
-        nav_links.append(f"[{letter}](#{anchor})")
-    
-    content.append(f"**快速导航**: {' | '.join(nav_links)}\n")
-    
-    for letter in available_letters:
-        anchor = letter.lower() + '-字母' if letter != '#' else 'other-字母'
-        letter_display = "其他" if letter == '#' else f"{letter} 字母"
-        content.append(f"#### {letter_display} {{#{anchor}}}")
-        
-        files_in_letter = sorted(files_by_letter[letter], key=lambda x: x['title'])
-        for file_info in files_in_letter:
-            relative_path = str(file_info['path']).replace('\\', '/')
-            category_badge = f"`{file_info['category']}`" if file_info['category'] != "根目录" else "`根目录`"
-            content.append(f"- [{file_info['title']}]({relative_path}) {category_badge}")
-        
         content.append("")
     
     return '\n'.join(content)
