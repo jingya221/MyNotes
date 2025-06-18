@@ -1,6 +1,14 @@
+---
+layout: default
+title: "📝 我的Markdown笔记本"
+description: "个人学习笔记和想法的收集地"
+---
+
 # 📝 我的Markdown笔记本
 
 欢迎来到我的个人笔记本！这里收集了我的各种学习笔记和想法。
+
+<div class="stats-card">
 
 ## 📚 笔记目录
 
@@ -37,10 +45,12 @@
 - [欢迎使用Markdown笔记系统](notes/示例笔记.md) 
 <!-- 笔记索引结束 -->
 
+</div>
+
 ## 🚀 如何使用
 
 1. 在 `notes/` 文件夹中创建新的markdown文件
-2. 运行更新脚本来自动更新此README的目录索引
+2. 运行更新脚本来自动更新此目录索引
 3. 提交并推送到GitHub
 
 ## 📋 自动更新目录
@@ -61,12 +71,17 @@ python update_readme.py
 
 ```
 NotesGit/
-├── README.md          # 本文件
-├── notes/            # 笔记文件夹
-├── update_readme.py  # 自动更新脚本
-└── update_notes.bat  # 便捷批处理文件
+├── index.md          # 网站主页
+├── README.md         # GitHub仓库说明
+├── notes/           # 笔记文件夹
+├── update_readme.py # 自动更新脚本
+└── update_notes.bat # 便捷批处理文件
 ```
 
 ---
+
+<div class="tip">
+💡 <strong>提示</strong>：这个网站会自动更新，每当您添加新笔记并运行更新脚本时，目录就会自动刷新。
+</div>
 
 *最后更新: 2025-06-18 12:07:29* 

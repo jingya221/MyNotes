@@ -54,10 +54,10 @@ paginate: 10
 
 # 排除文件
 exclude:
-  - README.md
   - SETUP_GUIDE.md
   - update_readme.py
   - update_notes.bat
   - .gitignore
   - Gemfile
-  - Gemfile.lock 
+  - Gemfile.lock
+  - 使用指南.md 

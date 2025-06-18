@@ -199,19 +199,15 @@ def generate_index_content(markdown_files):
     
     return '\n'.join(content)
 
-def update_readme():
-    """更新README.md文件"""
-    readme_path = Path('./README.md')
-    if not readme_path.exists():
-        print("README.md文件不存在！")
+def update_file(file_path, markdown_files):
+    """更新指定的markdown文件"""
+    if not file_path.exists():
+        print(f"{file_path.name}文件不存在！")
         return False
     
-    # 读取当前README内容
-    with open(readme_path, 'r', encoding='utf-8') as file:
+    # 读取当前文件内容
+    with open(file_path, 'r', encoding='utf-8') as file:
         content = file.read()
-    
-    # 扫描笔记文件
-    markdown_files = scan_notes_folder()
     
     # 生成新的索引内容
     index_content = generate_index_content(markdown_files)
@@ -226,7 +222,7 @@ def update_readme():
     if re.search(pattern, content, re.DOTALL):
         new_content = re.sub(pattern, new_section, content, flags=re.DOTALL)
     else:
-        print("未找到索引标记，请检查README.md格式！")
+        print(f"未找到索引标记，请检查{file_path.name}格式！")
         return False
     
     # 更新最后更新时间
@@ -238,17 +234,41 @@ def update_readme():
     )
     
     # 写入文件
-    with open(readme_path, 'w', encoding='utf-8') as file:
+    with open(file_path, 'w', encoding='utf-8') as file:
         file.write(new_content)
     
-    print(f"✅ README.md 已更新！找到 {len(markdown_files)} 个笔记文件")
-    
-    # 显示分类统计
-    if markdown_files:
-        categories = set(f['category'] for f in markdown_files)
-        print(f"📁 发现分类: {', '.join(sorted(categories))}")
-    
     return True
+
+def update_readme():
+    """更新README.md和index.md文件"""
+    # 扫描笔记文件
+    markdown_files = scan_notes_folder()
+    
+    success_count = 0
+    files_to_update = [
+        Path('./README.md'),
+        Path('./index.md')
+    ]
+    
+    for file_path in files_to_update:
+        if file_path.exists():
+            if update_file(file_path, markdown_files):
+                print(f"✅ {file_path.name} 已更新！")
+                success_count += 1
+            else:
+                print(f"❌ {file_path.name} 更新失败！")
+        else:
+            print(f"⚠️ {file_path.name} 文件不存在，跳过更新")
+    
+    if success_count > 0:
+        print(f"📊 找到 {len(markdown_files)} 个笔记文件")
+        
+        # 显示分类统计
+        if markdown_files:
+            categories = set(f['category'] for f in markdown_files)
+            print(f"📁 发现分类: {', '.join(sorted(categories))}")
+    
+    return success_count > 0
 
 if __name__ == '__main__':
     update_readme() 
