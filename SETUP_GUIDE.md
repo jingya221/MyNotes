@@ -19,8 +19,8 @@
 
 ```bash
 # 设置用户信息
-git config --global user.name "您的姓名"
-git config --global user.email "您的邮箱@example.com"
+git config --global user.name "Jingya Wang"
+git config --global user.email "jingya221@gmail.com"
 
 # 添加所有文件到暂存区
 git add .
@@ -29,7 +29,7 @@ git add .
 git commit -m "初始化Markdown笔记系统"
 
 # 添加远程仓库（替换为您的GitHub用户名和仓库名）
-git remote add origin https://github.com/您的用户名/您的仓库名.git
+git remote add origin https://github.com/jingya221/MyNotes.git
 
 # 推送到GitHub
 git push -u origin main
