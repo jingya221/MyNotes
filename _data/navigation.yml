@@ -1,0 +1,11 @@
+docs:
+  - title: "📝 首页"
+    url: /
+  - title: "📁 根目录"
+    children:
+      - title: "欢迎使用Markdown笔记系统"
+        url: /notes/示例笔记/
+  - title: "🔬 R语言相关"
+    children:
+      - title: "xpt导出&读取"
+        url: /notes/R语言相关/xpt导出&读取/ 

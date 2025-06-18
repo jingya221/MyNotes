@@ -6,8 +6,8 @@ email: "jingya221@gmail.com"
 url: "https://jingya221.github.io"
 baseurl: "/MyNotes"
 
-# 主题设置 - 使用Just the Docs文档主题
-remote_theme: just-the-docs/just-the-docs
+# 主题设置 - 使用Minimal Mistakes主题
+remote_theme: mmistakes/minimal-mistakes
 
 # 插件
 plugins:
@@ -33,40 +33,70 @@ kramdown:
 # 高亮设置  
 highlighter: rouge
 
-# Just the Docs 主题配置
-color_scheme: wide
-search_enabled: true
-search:
-  heading_level: 2
-  previews: 2
-  preview_words_before: 3
-  preview_words_after: 3
-  tokenizer_separator: /[\s/]+/
-  rel_url: true
-  button: false
+# Minimal Mistakes 主题配置
+minimal_mistakes_skin: "default"
+locale: "zh-CN"
+search: true
+search_full_content: true
+search_provider: lunr
 
 # 导航配置
-nav_sort: case_insensitive
-nav_fold: true
+masthead_title: "📝 我的Markdown笔记本"
+
+# 侧边栏配置
+sidebar:
+  nav: "docs"
 
 # 页脚配置
-footer_content: "Copyright &copy; 2024 Jingya Wang. 使用 <a href=\"https://github.com/just-the-docs/just-the-docs\">Just the Docs</a> 构建."
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/jingya221/MyNotes"
 
-# 社交链接（在页脚显示）
-gh_edit_link: true
-gh_edit_link_text: "在GitHub上编辑此页"
-gh_edit_repository: "https://github.com/jingya221/MyNotes"
-gh_edit_branch: "main"
-gh_edit_view_mode: "tree"
+# 社交链接
+social:
+  type: Person
+  name: "Jingya Wang"
+  links:
+    - "https://github.com/jingya221"
 
-# 代码复制按钮
-enable_copy_code_button: true
+# 分页配置
+paginate: 5
+paginate_path: /page:num/
 
-# 显示设置
-heading_anchors: true
-aux_links:
-  "在GitHub上查看":
-    - "//github.com/jingya221/MyNotes"
+# 默认设置
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: false
+      share: true
+      related: true
+      sidebar:
+        nav: "docs"
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: false
+      sidebar:
+        nav: "docs"
+  # notes
+  - scope:
+      path: "notes"
+    values:
+      layout: single
+      author_profile: false
+      sidebar:
+        nav: "docs"
 
 # 排除文件
 exclude:

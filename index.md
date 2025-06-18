@@ -1,19 +1,17 @@
 ---
-layout: default
-title: 首页
-nav_order: 1
-description: "个人Markdown笔记管理系统"
+layout: single
+title: "📝 我的Markdown笔记本"
+classes: wide
 permalink: /
+author_profile: false
+sidebar:
+  nav: "docs"
 ---
 
-# 📝 我的Markdown笔记本
-{: .fs-9 }
-
 欢迎来到我的个人笔记本！这里收集了我的各种学习笔记和想法。
-{: .fs-6 .fw-300 }
 
-[开始浏览笔记]({{ site.baseurl }}/notes/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[查看GitHub仓库](https://github.com/jingya221/MyNotes){: .btn .fs-5 .mb-4 .mb-md-0 }
+<a href="{{ site.baseurl }}/notes/" class="btn btn--primary">开始浏览笔记</a>
+<a href="https://github.com/jingya221/MyNotes" class="btn btn--info">查看GitHub仓库</a>
 
 ---
 

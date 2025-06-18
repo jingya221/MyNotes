@@ -1,8 +1,14 @@
 ---
-layout: default
-title: xpt导出&读取
-parent: R语言相关
-nav_order: 1
+layout: single
+title: "xpt导出&读取"
+classes: wide
+category: "R语言相关"
+author_profile: false
+sidebar:
+  nav: "docs"
+toc: true
+toc_label: "目录"
+toc_icon: "cog"
 ---
 
 # xpt导出&读取
