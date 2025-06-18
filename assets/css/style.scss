@@ -187,7 +187,7 @@ li {
 }
 
 /* 最近更新区域 */
-h2:contains("最近更新") + ul li {
+h2 + ul li {
   background: #f8f9fa;
   padding: 10px;
   border-left: 4px solid #28a745;
@@ -196,11 +196,12 @@ h2:contains("最近更新") + ul li {
 }
 
 /* 分类浏览区域 */
-h3[id*="分类"] {
+h3 {
   background: #e9ecef;
   padding: 15px;
   border-radius: 8px;
   border-left: 4px solid #17a2b8;
+  margin: 20px 0;
 }
 
 /* 字母索引导航 */
@@ -274,7 +275,7 @@ h3[id*="分类"] {
     background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
   }
   
-  h3[id*="分类"] {
+  h3 {
     background: #2d2d2d;
     color: #ffffff;
   }

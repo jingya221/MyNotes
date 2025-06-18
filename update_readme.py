@@ -45,9 +45,9 @@ def extract_description_from_markdown(file_path):
             if line.startswith('#'):
                 found_title = True
                 continue
-            if found_title and line and not line.startswith('#'):
-                # 取前100个字符作为描述
-                description = line[:100] + ("..." if len(line) > 100 else "")
+            if found_title and line and not line.startswith('#') and not line.startswith('```'):
+                # 取前50个字符作为描述，避免代码块
+                description = line[:50] + ("..." if len(line) > 50 else "")
                 break
         
         return description
@@ -102,11 +102,14 @@ def generate_statistics(markdown_files):
     recent_count = sum(1 for f in markdown_files if (today - f['modified'].date()).days <= 7)
     
     stats = [
-        f"📊 **统计信息**",
-        f"- 📝 总笔记数：**{total_files}** 个",
-        f"- 📁 分类数：**{total_categories}** 个",
-        f"- 🔥 最近7天更新：**{recent_count}** 个",
-        f"- 📅 最后更新：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+        f"## 📊 统计信息",
+        "",
+        f"- 📝 **总笔记数：{total_files} 个**",
+        f"- 📁 **分类数：{total_categories} 个**", 
+        f"- 🔥 **最近7天更新：{recent_count} 个**",
+        f"- 📅 **最后更新：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}**",
+        "",
+        "---",
         ""
     ]
     
@@ -133,11 +136,14 @@ def generate_index_content(markdown_files):
             modified_str = file_info['modified'].strftime('%Y-%m-%d')
             category_badge = f"`{file_info['category']}`" if file_info['category'] != "根目录" else ""
             description = f" - {file_info['description']}" if file_info['description'] else ""
-            content.append(f"- [{file_info['title']}]({relative_path}) {category_badge} *({modified_str})*{description}")
+            content.append(f"- [**{file_info['title']}**]({relative_path}) {category_badge} *({modified_str})*{description}")
+        content.append("")
+        content.append("---")
         content.append("")
     
     # 按分类分组显示
-    content.append("## 📚 分类浏览\n")
+    content.append("## 📚 分类浏览")
+    content.append("")
     
     files_by_category = defaultdict(list)
     for file_info in markdown_files:
@@ -157,13 +163,17 @@ def generate_index_content(markdown_files):
         for file_info in files_in_category:
             relative_path = str(file_info['path']).replace('\\', '/')
             modified_str = file_info['modified'].strftime('%Y-%m-%d')
-            description = f" - {file_info['description']}" if file_info['description'] else ""
-            content.append(f"- **[{file_info['title']}]({relative_path})** *({modified_str})*{description}")
+            description = f"  \n  {file_info['description']}" if file_info['description'] else ""
+            content.append(f"- [**{file_info['title']}**]({relative_path}) *({modified_str})*{description}")
         
         content.append("")
     
+    content.append("---")
+    content.append("")
+    
     # 按字母索引（可选的快速查找）
-    content.append("## 🔍 字母索引\n")
+    content.append("## 🔍 字母索引")
+    content.append("")
     
     files_by_letter = defaultdict(list)
     for file_info in markdown_files:
@@ -180,19 +190,20 @@ def generate_index_content(markdown_files):
     
     nav_links = []
     for letter in available_letters:
-        nav_links.append(f"[{letter}](#{letter.lower() if letter != '#' else 'other'})")
+        anchor = letter.lower() + '-字母' if letter != '#' else 'other-字母'
+        nav_links.append(f"[{letter}](#{anchor})")
     
     content.append(f"**快速导航**: {' | '.join(nav_links)}\n")
     
     for letter in available_letters:
-        anchor = letter.lower() if letter != '#' else 'other'
-        letter_display = "其他" if letter == '#' else letter
+        anchor = letter.lower() + '-字母' if letter != '#' else 'other-字母'
+        letter_display = "其他" if letter == '#' else f"{letter} 字母"
         content.append(f"#### {letter_display} {{#{anchor}}}")
         
         files_in_letter = sorted(files_by_letter[letter], key=lambda x: x['title'])
         for file_info in files_in_letter:
             relative_path = str(file_info['path']).replace('\\', '/')
-            category_badge = f"`{file_info['category']}`" if file_info['category'] != "根目录" else ""
+            category_badge = f"`{file_info['category']}`" if file_info['category'] != "根目录" else "`根目录`"
             content.append(f"- [{file_info['title']}]({relative_path}) {category_badge}")
         
         content.append("")
