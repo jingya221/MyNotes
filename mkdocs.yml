@@ -110,6 +110,8 @@ nav:
         Deployment in Hengrui Server.md
   - R语言相关:
     - XPT文件导出与读取: notes/R语言相关/xpt-export-import.md
+  - SAS相关:
+    - Estimand实战经验分享 <!-- omit in toc -->: notes/SAS相关/Estimand实战经验分享.md
 - 使用指南:
   - 如何使用: guide/usage.md
   - 添加笔记: guide/add-notes.md
