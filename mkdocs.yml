@@ -100,14 +100,15 @@ nav:
 - 首页: index.md
 - 笔记分类:
   - R shiny开发教程:
-    - 00-使用{Golem}搭建Rshiny project指南 <!-- omit in toc -->: notes/R语言相关/R shiny开发教程/00-使用{Golem}搭建Rshiny
+    - 00-使用{Golem}搭建Rshiny project指南 <!-- omit in toc -->: notes/R shiny开发教程/00-使用{Golem}搭建Rshiny
         project指南.md
-    - 01-数据读入&数据处理模块开发指南 <!-- omit in toc -->: notes/R语言相关/R shiny开发教程/01-数据读入&数据处理模块开发指南.md
-    - 02-分析图表相关模块开发指南 <!-- omit in toc -->: notes/R语言相关/R shiny开发教程/02-分析图表相关模块开发指南.md
-    - 03-基于MediSum模块开发项目的ShinyApp整合指南 <!-- omit in toc -->: notes/R语言相关/R shiny开发教程/03-基于MediSum模块开发项目的ShinyApp整合指南.md
+    - 01-数据读入&数据处理模块开发指南 <!-- omit in toc -->: notes/R shiny开发教程/01-数据读入&数据处理模块开发指南.md
+    - 02-分析图表相关模块开发指南 <!-- omit in toc -->: notes/R shiny开发教程/02-分析图表相关模块开发指南.md
+    - 03-基于MediSum模块开发项目的ShinyApp整合指南 <!-- omit in toc -->: notes/R shiny开发教程/03-基于MediSum模块开发项目的ShinyApp整合指南.md
   - R shiny部署教程:
     - R Shiny Server Deployment in Hengrui Server: notes/R shiny部署教程/0-R Shiny Server
         Deployment in Hengrui Server.md
+    - R shiny部署简略版: notes/R shiny部署教程/部署简略版.md
   - R语言相关:
     - R Package相关网址存档: notes/R语言相关/R Packages.md
     - XPT文件导出与读取: notes/R语言相关/xpt-export-import.md
