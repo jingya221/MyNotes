@@ -109,6 +109,7 @@ nav:
     - R Shiny Server Deployment in Hengrui Server: notes/R shiny部署教程/0-R Shiny Server
         Deployment in Hengrui Server.md
   - R语言相关:
+    - R Package相关网址存档 <!-- omit in Content -->: notes/R语言相关/R Packages.md
     - XPT文件导出与读取: notes/R语言相关/xpt-export-import.md
   - SAS相关:
     - Estimand实战经验分享 <!-- omit in toc -->: notes/SAS相关/Estimand实战经验分享.md
