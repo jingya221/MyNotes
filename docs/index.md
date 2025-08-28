@@ -5,10 +5,10 @@
 ## 📋 笔记目录
 
 ### R shiny开发教程
-- [00-使用{Golem}搭建Rshiny project指南 <!-- omit in toc -->](notes/R shiny开发教程/00-使用{Golem}搭建Rshiny project指南) - >作者：王靖雅 <br>
-- [01-数据读入&数据处理模块开发指南 <!-- omit in toc -->](notes/R shiny开发教程/01-数据读入&数据处理模块开发指南) - >作者：王靖雅 <br>
-- [02-分析图表相关模块开发指南 <!-- omit in toc -->](notes/R shiny开发教程/02-分析图表相关模块开发指南) - >作者：王靖雅 <br>
-- [03-基于MediSum模块开发项目的ShinyApp整合指南 <!-- omit in toc -->](notes/R shiny开发教程/03-基于MediSum模块开发项目的ShinyApp整合指南) - >作者：王靖雅 <br>
+- [00-使用{Golem}搭建Rshiny project指南 <!-- omit in toc -->](notes/R语言相关/R shiny开发教程/00-使用{Golem}搭建Rshiny project指南) - >作者：王靖雅 <br>
+- [01-数据读入&数据处理模块开发指南 <!-- omit in toc -->](notes/R语言相关/R shiny开发教程/01-数据读入&数据处理模块开发指南) - >作者：王靖雅 <br>
+- [02-分析图表相关模块开发指南 <!-- omit in toc -->](notes/R语言相关/R shiny开发教程/02-分析图表相关模块开发指南) - >作者：王靖雅 <br>
+- [03-基于MediSum模块开发项目的ShinyApp整合指南 <!-- omit in toc -->](notes/R语言相关/R shiny开发教程/03-基于MediSum模块开发项目的ShinyApp整合指南) - >作者：王靖雅 <br>
 
 ### R shiny部署教程
 - [R Shiny Server Deployment in Hengrui Server](notes/R shiny部署教程/0-R Shiny Server Deployment in Hengrui Server) - shnvlshiny01	10.10.5.114	 root/Hr@shiny0821
