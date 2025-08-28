@@ -1,30 +1,4 @@
-# R Package相关网址存档 <!-- omit in Content -->
-
-## Content <!-- omit in Content -->
-- [R Package相关网址存档 ](#r-package相关网址存档-)
-  - [Content ](#content-)
-  - [pharmaverse 大合集](#pharmaverse-大合集)
-  - [数据生成相关](#数据生成相关)
-      - [{sdtm.oak}： 生成sdtm部分变量的包](#sdtmoak-生成sdtm部分变量的包)
-      - [{admiral}：数据生成中简化的好用function](#admiral数据生成中简化的好用function)
-      - [{xportr}: r输出xpt格式文件](#xportr-r输出xpt格式文件)
-  - [TFL相关](#tfl相关)
-      - [TLG catalog：包含大多数的图表制作方法和代码](#tlg-catalog包含大多数的图表制作方法和代码)
-      - [{rtables}: 基础的表格出具 \& {rtables.office}: 表格输出下载部分（从0.6.11版本后从rtables独立出来）](#rtables-基础的表格出具--rtablesoffice-表格输出下载部分从0611版本后从rtables独立出来)
-      - [{tern}: rtables进阶版，包含很多分析方法的表格出具](#tern-rtables进阶版包含很多分析方法的表格出具)
-      - [{tidytlg}: 我还没用过](#tidytlg-我还没用过)
-  - [AI相关](#ai相关)
-      - [{ellmer}: 提供各大AI调用模式](#ellmer-提供各大ai调用模式)
-      - [{shinychat}: shiny ai聊天框](#shinychat-shiny-ai聊天框)
-  - [shiny参考](#shiny参考)
-      - [tidyCDISC](#tidycdisc)
-      - [teal.gallery: 罗氏的开源shiny搭建模块](#tealgallery-罗氏的开源shiny搭建模块)
-      - [{aNCA}： 没试过，研究一下！](#anca-没试过研究一下)
-  - [其他](#其他)
-      - [{renv}:控制project中package环境](#renv控制project中package环境)
-      - [submission pilot workshop](#submission-pilot-workshop)
-      - [submission pilot3：可以参考代码使用和流程搭建规范](#submission-pilot3可以参考代码使用和流程搭建规范)
-<hr>
+# R Package相关网址存档
 
 ## pharmaverse 大合集
 https://pharmaverse.org/

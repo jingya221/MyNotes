@@ -16,7 +16,7 @@
 - [R Shiny Server Deployment in Hengrui Server](docs/notes/R shiny部署教程/0-R Shiny Server Deployment in Hengrui Server) - shnvlshiny01	10.10.5.114	 root/Hr@shiny0821
 
 ### R语言相关
-- [R Package相关网址存档 <!-- omit in Content -->](docs/notes/R语言相关/R Packages) - - [R Package相关网址存档 ](#r-package相关网址存档-)
+- [R Package相关网址存档](docs/notes/R语言相关/R Packages) - https://pharmaverse.org/
 - [XPT文件导出与读取](docs/notes/R语言相关/xpt-export-import) - 这个笔记来源于R taskforce出现的导出xpt无法打开的问题。
 
 ### SAS相关
@@ -31,7 +31,7 @@
 
 - **笔记分类**: 4个
 - **总笔记数**: 8篇
-- **最近更新**: R Package相关网址存档 <!-- omit in Content -->
+- **最近更新**: R Package相关网址存档
 
 ---
 
@@ -66,4 +66,4 @@ NotesGit/
 
 ---
 
-*📅 最后更新: 2025-08-28 15:48:41*
+*📅 最后更新: 2025-08-28 15:51:03*
