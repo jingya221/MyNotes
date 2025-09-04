@@ -6,6 +6,21 @@
 
 ## 📋 笔记目录
 
+### MediSum相关
+- [ADAE数据集生成规则文档](docs/notes/MediSum相关/02-ADAE生成规则) - `gen_adae`函数的主要功能是根据原始EDC数据和规范(spec)生成ADAE(Analysi...
+- [ADCMCST数据集生成规则文档](docs/notes/MediSum相关/04-ADCMCST生成规则) - `gen_adcmcst`函数的主要功能是根据原始EDC数据和规范(spec)生成ADCM_CST(...
+- [ADMHC数据集生成规则文档](docs/notes/MediSum相关/03-ADMHC生成规则) - `gen_admhc`函数的主要功能是根据原始EDC数据和规范(spec)生成ADMH_C(Anal...
+- [ADPRRT数据集生成规则文档](docs/notes/MediSum相关/05-ADPRRT生成规则) - `gen_adprrt`函数的主要功能是根据原始EDC数据和规范(spec)生成ADPR_RT(An...
+- [ADPRTSURG数据集生成规则文档](docs/notes/MediSum相关/05-ADPRTSURG生成规则) - `gen_adprtsurg`函数的主要功能是根据原始EDC数据和规范(spec)生成ADPR_TS...
+- [ADRESP数据集生成规则文档](docs/notes/MediSum相关/08-ADRESP生成规则) - `gen_adresp`函数的主要功能是根据原始EDC数据和规范(spec)生成ADRESP(Ana...
+- [ADRS数据集生成规则文档](docs/notes/MediSum相关/07-ADRS生成规则) - `gen_adrs`函数的主要功能是根据原始EDC数据和规范(spec)生成ADRS(Analysi...
+- [ADSL数据集生成规则文档](docs/notes/MediSum相关/01-ADSL生成规则) - `gen_adsl`函数的主要功能是根据原始EDC数据和规范(spec)生成ADSL(Analysi...
+- [ADTRT数据集生成规则文档](docs/notes/MediSum相关/06-ADTRT生成规则) - `gen_adtrt`函数的主要功能是根据原始EDC数据和规范(spec)生成ADTRT(Analy...
+- [ADTTE数据集生成规则文档](docs/notes/MediSum相关/09-ADTTE生成规则) - `gen_adtte`函数的主要功能是根据原始EDC数据和规范(spec)生成ADTTE(Analy...
+
+### Meeting Notes
+- [2023-PharmaSUG](docs/notes/Meeting Notes/2023-PharmaSUG)
+
 ### R shiny开发教程
 - [00-使用{Golem}搭建Rshiny project指南 <!-- omit in toc -->](docs/notes/R shiny开发教程/00-使用{Golem}搭建Rshiny project指南) - >作者：王靖雅 <br>
 - [01-数据读入&数据处理模块开发指南 <!-- omit in toc -->](docs/notes/R shiny开发教程/01-数据读入&数据处理模块开发指南) - >作者：王靖雅 <br>
@@ -30,9 +45,9 @@
 
 ## 📊 统计信息
 
-- **笔记分类**: 4个
-- **总笔记数**: 9篇
-- **最近更新**: R shiny部署简略版
+- **笔记分类**: 6个
+- **总笔记数**: 20篇
+- **最近更新**: ADRESP数据集生成规则文档
 
 ---
 
@@ -67,4 +82,4 @@ NotesGit/
 
 ---
 
-*📅 最后更新: 2025-08-28 16:39:26*
+*📅 最后更新: 2025-09-04 13:56:15*

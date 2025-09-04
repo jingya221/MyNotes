@@ -99,6 +99,19 @@ markdown_extensions:
 nav:
 - 首页: index.md
 - 笔记分类:
+  - MediSum相关:
+    - ADAE数据集生成规则文档: notes/MediSum相关/02-ADAE生成规则.md
+    - ADCMCST数据集生成规则文档: notes/MediSum相关/04-ADCMCST生成规则.md
+    - ADMHC数据集生成规则文档: notes/MediSum相关/03-ADMHC生成规则.md
+    - ADPRRT数据集生成规则文档: notes/MediSum相关/05-ADPRRT生成规则.md
+    - ADPRTSURG数据集生成规则文档: notes/MediSum相关/05-ADPRTSURG生成规则.md
+    - ADRESP数据集生成规则文档: notes/MediSum相关/08-ADRESP生成规则.md
+    - ADRS数据集生成规则文档: notes/MediSum相关/07-ADRS生成规则.md
+    - ADSL数据集生成规则文档: notes/MediSum相关/01-ADSL生成规则.md
+    - ADTRT数据集生成规则文档: notes/MediSum相关/06-ADTRT生成规则.md
+    - ADTTE数据集生成规则文档: notes/MediSum相关/09-ADTTE生成规则.md
+  - Meeting Notes:
+    - 2023-PharmaSUG: notes/Meeting Notes/2023-PharmaSUG.md
   - R shiny开发教程:
     - 00-使用{Golem}搭建Rshiny project指南 <!-- omit in toc -->: notes/R shiny开发教程/00-使用{Golem}搭建Rshiny
         project指南.md
