@@ -100,15 +100,16 @@ nav:
 - 首页: index.md
 - 笔记分类:
   - MediSum相关:
-    - ADAE数据集生成规则文档: notes/MediSum相关/02-ADAE生成规则.md
-    - ADCMCST数据集生成规则文档: notes/MediSum相关/04-ADCMCST生成规则.md
-    - ADMHC数据集生成规则文档: notes/MediSum相关/03-ADMHC生成规则.md
-    - ADPRRT数据集生成规则文档: notes/MediSum相关/05-ADPRRT生成规则.md
-    - ADPRTSURG数据集生成规则文档: notes/MediSum相关/05-ADPRTSURG生成规则.md
-    - ADRESP数据集生成规则文档: notes/MediSum相关/08-ADRESP生成规则.md
-    - ADRS数据集生成规则文档: notes/MediSum相关/07-ADRS生成规则.md
-    - ADTRT数据集生成规则文档: notes/MediSum相关/06-ADTRT生成规则.md
-    - ADTTE数据集生成规则文档: notes/MediSum相关/09-ADTTE生成规则.md
+    - 01-ADSL数据集生成规则文档: notes/MediSum相关/01-ADSL生成规则.md
+    - 02-ADAE数据集生成规则文档: notes/MediSum相关/02-ADAE生成规则.md
+    - 03-ADMHC数据集生成规则文档: notes/MediSum相关/03-ADMHC生成规则.md
+    - 04-ADCMCST数据集生成规则文档: notes/MediSum相关/04-ADCMCST生成规则.md
+    - 05-ADPRRT数据集生成规则文档: notes/MediSum相关/05-ADPRRT生成规则.md
+    - 05-ADPRTSURG数据集生成规则文档: notes/MediSum相关/05-ADPRTSURG生成规则.md
+    - 06-ADTRT数据集生成规则文档: notes/MediSum相关/06-ADTRT生成规则.md
+    - 07-ADRS数据集生成规则文档: notes/MediSum相关/07-ADRS生成规则.md
+    - 08-ADRESP数据集生成规则文档: notes/MediSum相关/08-ADRESP生成规则.md
+    - 09-ADTTE数据集生成规则文档: notes/MediSum相关/09-ADTTE生成规则.md
   - Meeting Notes:
     - 2023-PharmaSUG: notes/Meeting Notes/2023-PharmaSUG.md
   - R shiny开发教程:
@@ -126,8 +127,6 @@ nav:
     - XPT文件导出与读取: notes/R语言相关/xpt-export-import.md
   - SAS相关:
     - Estimand实战经验分享 <!-- omit in toc -->: notes/SAS相关/Estimand实战经验分享.md
-  - TFL相关:
-    - ADSL数据集生成规则文档: notes/MediSum相关/TFL相关/01-ADSL生成规则.md
 - 使用指南:
   - 如何使用: guide/usage.md
   - 添加笔记: guide/add-notes.md
