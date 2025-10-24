@@ -4,6 +4,9 @@
 
 ## 📋 笔记目录
 
+### AI相关
+- [R结合AI的用法 & 参考网址](notes/AI相关/R shiny with AI) - https://ellmer.tidyverse.org/index.html
+
 ### MediSum相关
 - [01-ADSL数据集生成规则文档](notes/MediSum相关/01-ADSL生成规则) - `gen_adsl`函数的主要功能是根据原始EDC数据和规范(spec)生成ADSL(Analysi...
 - [02-ADAE数据集生成规则文档](notes/MediSum相关/02-ADAE生成规则) - `gen_adae`函数的主要功能是根据原始EDC数据和规范(spec)生成ADAE(Analysi...
@@ -43,9 +46,9 @@
 
 ## 📊 统计信息
 
-- **笔记分类**: 6个
-- **总笔记数**: 20篇
-- **最近更新**: R shiny部署简略版
+- **笔记分类**: 7个
+- **总笔记数**: 21篇
+- **最近更新**: R结合AI的用法 & 参考网址
 
 ---
 

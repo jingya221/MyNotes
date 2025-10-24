@@ -99,6 +99,8 @@ markdown_extensions:
 nav:
 - 首页: index.md
 - 笔记分类:
+  - AI相关:
+    - R结合AI的用法 & 参考网址: notes/AI相关/R shiny with AI.md
   - MediSum相关:
     - 01-ADSL数据集生成规则文档: notes/MediSum相关/01-ADSL生成规则.md
     - 02-ADAE数据集生成规则文档: notes/MediSum相关/02-ADAE生成规则.md
